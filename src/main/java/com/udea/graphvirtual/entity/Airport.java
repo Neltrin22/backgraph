@@ -1,4 +1,4 @@
-package com.udea.graphvirtual.entity;
+package co.edu.udea.codefactory.sitas.entity;
 
 import jakarta.persistence.*;
 import lombok.*;

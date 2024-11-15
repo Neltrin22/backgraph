@@ -1,4 +1,4 @@
-package com.udea.graphvirtual.entity;
+package co.edu.udea.codefactory.sitas.entity;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 import jakarta.persistence.*;
@@ -12,7 +12,6 @@ import java.util.UUID;
 @Data
 @Getter
 @Setter
-@Builder
 @NoArgsConstructor
 @AllArgsConstructor
 @Table(name = "flight")
