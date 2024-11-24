@@ -1,0 +1,42 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: busqueda-vuelos-virtual-app  # Nuevo nombre del deployment
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: busqueda-vuelos-virtual  # Nuevo nombre de la app
+  template:
+    metadata:
+      labels:
+        app: busqueda-vuelos-virtual  # Nuevo nombre de la app
+    spec:
+      containers:
+        - name: busqueda-vuelos-virtual-app  # Nuevo nombre del contenedor
+          image: busqueda-vuelos-virtual-app:latest  # Nuevo nombre de la imagen
+          imagePullPolicy: Never
+          ports:
+            - containerPort: 8089
+          env:
+            - name: SPRING_DATASOURCE_URL
+              value: "jdbc:postgresql://postgresql:5432/busqueda_vuelos_virtual"  # Nueva base de datos
+            - name: SPRING_DATASOURCE_USERNAME
+              value: "user_deploy"  # Usuario de PostgreSQL
+            - name: SPRING_DATASOURCE_PASSWORD
+              valueFrom:
+                configMapKeyRef:
+                  name: postgresql-config  # ConfigMap de PostgreSQL
+                  key: POSTGRES_PASSWORD  # Nombre de la clave para la contraseña en ConfigMap
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: busqueda-vuelos-virtual-service  # Nuevo nombre del servicio
+spec:
+  ports:
+    - port: 8089
+      targetPort: 8089
+  selector:
+    app: busqueda-vuelos-virtual  # Nuevo nombre de la app
+  type: LoadBalancer
