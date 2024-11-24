@@ -3,7 +3,7 @@ kind: Deployment
 metadata:
   name: busqueda-vuelos-virtual-app  # Nuevo nombre del deployment
 spec:
-  replicas: 2
+  replicas: 5
   selector:
     matchLabels:
       app: busqueda-vuelos-virtual  # Nuevo nombre de la app
