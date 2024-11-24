@@ -1,0 +1,12 @@
+name: busqueda_vuelos_virtual
+services:
+  springboot-app:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    ports:
+    - "8014:8014" #puerto correspondiente
+    networks:
+    - my_bridge_network
+networks:
+  my_bridge_network:
